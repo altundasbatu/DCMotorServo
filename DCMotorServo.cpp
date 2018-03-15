@@ -13,10 +13,10 @@ DCMotorServo::DCMotorServo(uint8_t pin_dir_1, uint8_t pin_dir_2, uint8_t pin_PWM
   pinMode(_pin_PWM_output, OUTPUT);
 
   _position = new Encoder(pin_encode1, pin_encode2);
-  _PWM_output = 0;  
+  _PWM_output = 0;
   _pwm_skip = 50;
   _position_accuracy = 30;
-  
+
   _PID_input = _position->read();
   _PID_output = 0;
   _PID_setpoint = _PID_input;
@@ -50,17 +50,17 @@ bool DCMotorServo::setPWMSkip(uint8_t range)
     return 0;
 }
 
-//void DCMotorServo::SetPIDTunings(double Kp, double Ki, double Kd)
-//{
-//	myPID->SetTunings(Kp, Ki, Kd);
-//}
+void DCMotorServo::SetPIDTunings(double Kp, double Ki, double Kd)
+{
+	myPID->SetTunings(Kp, Ki, Kd);
+}
 
 bool DCMotorServo::finished()
 {
   if (abs(_PID_setpoint - _PID_input) < _position_accuracy && _PWM_output == 0)
     return 1;
   return 0;
- 
+
 }
 
 void DCMotorServo::move(int new_rela_position)
@@ -122,6 +122,6 @@ void DCMotorServo::_pick_direction() {
     digitalWrite(_pin_dir_1, HIGH);
     digitalWrite(_pin_dir_2, LOW);
   }
-  
+
 }
 

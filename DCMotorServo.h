@@ -55,11 +55,12 @@ public:
   bool setPWMSkip(uint8_t);
   void setAccuracy(unsigned int);
   void setCurrentPosition(int);
+  void SetPIDTunings(double Kp, double Ki, double Kd);
 private:
   uint8_t _pin_PWM_output, _pin_dir_1, _pin_dir_2;
   double _PID_setpoint, _PID_input, _PID_output;
   uint8_t _PWM_output;
-  
+
   Encoder * _position;
   uint8_t _pwm_skip;            //The range of PWM to skip (for me, I set it to 50 because duty-cycles under 50/255 are not enough to surpass motor and gearing frictions)
   uint8_t _position_accuracy;   //Set to the highest tolerable inaccuracy (units are encoder counts)
